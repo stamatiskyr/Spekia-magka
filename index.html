@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Coding Learning Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .phase {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .phase:hover {
+            transform: translateY(-5px);
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .phase-title {
+            font-size: 1.5em;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phase-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .duration {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .milestone {
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .milestone:hover {
+            background: #eef0ff;
+            transform: translateX(5px);
+        }
+
+        .milestone.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+            opacity: 0.8;
+        }
+
+        .milestone-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .milestone.completed .checkbox {
+            background: #28a745;
+            border-color: #28a745;
+        }
+
+        .checkmark {
+            display: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .milestone.completed .checkmark {
+            display: block;
+        }
+
+        .milestone-content {
+            flex: 1;
+        }
+
+        .milestone-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .milestone.completed .milestone-title {
+            text-decoration: line-through;
+        }
+
+        .milestone-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .resources {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            display: none;
+        }
+
+        .milestone.expanded .resources {
+            display: block;
+        }
+
+        .resource-link {
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+            padding: 5px 12px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.85em;
+            transition: background 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: #5568d3;
+        }
+
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .progress-header {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 My Coding Journey</h1>
+            <p class="subtitle">Your personalized roadmap to becoming a developer</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-header">Overall Progress</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">1</div>
+                    <span>Foundation - HTML & CSS</span>
+                </div>
+                <div class="duration">4-6 weeks</div>
+            </div>
+            
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Learn HTML Basics</div>
+                        <div class="milestone-desc">Elements, tags, attributes, semantic HTML</div>
+                    </div>
+                </div>
+                <div class="resources">
+                    <a href="https://www.freecodecamp.org/learn/2022/responsive-web-design/" class="resource-link" target="_blank">freeCodeCamp</a>
+                    <a href="https://www.codecademy.com/learn/learn-html" class="resource-link" target="_blank">Codecademy</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML" class="resource-link" target="_blank">MDN Docs</a>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Master CSS Fundamentals</div>
+                        <div class="milestone-desc">Selectors, box model, colors, typography, positioning</div>
+                    </div>
+                </div>
+                <div class="resources">
+                    <a href="https://web.dev/learn/css/" class="resource-link" target="_blank">web.dev CSS</a>
+                    <a href="https://css-tricks.com/" class="resource-link" target="_blank">CSS-Tricks</a>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Build Your First Web Page</div>
+                        <div class="milestone-desc">Create a personal portfolio or landing page</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Learn Flexbox & Grid</div>
+                        <div class="milestone-desc">Modern CSS layout techniques</div>
+                    </div>
+                </div>
+                <div class="resources">
+                    <a href="https://flexboxfroggy.com/" class="resource-link" target="_blank">Flexbox Froggy</a>
+                    <a href="https://cssgridgarden.com/" class="resource-link" target="_blank">Grid Garden</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">2</div>
+                    <span>JavaScript Fundamentals</span>
+                </div>
+                <div class="duration">6-8 weeks</div>
+            </div>
+            
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">JavaScript Basics</div>
+                        <div class="milestone-desc">Variables, data types, operators, conditionals, loops</div>
+                    </div>
+                </div>
+                <div class="resources">
+                    <a href="https://javascript.info/" class="resource-link" target="_blank">JavaScript.info</a>
+                    <a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/" class="resource-link" target="_blank">freeCodeCamp JS</a>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Functions & Scope</div>
+                        <div class="milestone-desc">Function declarations, expressions, arrow functions, scope</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">DOM Manipulation</div>
+                        <div class="milestone-desc">Select elements, modify content, handle events</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Build Interactive Projects</div>
+                        <div class="milestone-desc">Calculator, to-do list, or quiz app</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Arrays & Objects</div>
+                        <div class="milestone-desc">Array methods, object properties, JSON</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">3</div>
+                    <span>Advanced JavaScript</span>
+                </div>
+                <div class="duration">4-6 weeks</div>
+            </div>
+            
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">ES6+ Features</div>
+                        <div class="milestone-desc">Let/const, template literals, destructuring, spread operator</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Async JavaScript</div>
+                        <div class="milestone-desc">Promises, async/await, fetch API</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Work with APIs</div>
+                        <div class="milestone-desc">Fetch data from public APIs, build weather or news app</div>
+                    </div>
+                </div>
+                <div class="resources">
+                    <a href="https://github.com/public-apis/public-apis" class="resource-link" target="_blank">Free APIs List</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">4</div>
+                    <span>Tools & Best Practices</span>
+                </div>
+                <div class="duration">3-4 weeks</div>
+            </div>
+            
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Git & GitHub</div>
+                        <div class="milestone-desc">Version control, commits, branches, push/pull</div>
+                    </div>
+                </div>
+                <div class="resources">
+                    <a href="https://learngitbranching.js.org/" class="resource-link" target="_blank">Learn Git Branching</a>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Chrome DevTools</div>
+                        <div class="milestone-desc">Debug code, inspect elements, network tab</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Responsive Design</div>
+                        <div class="milestone-desc">Media queries, mobile-first approach</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <div class="phase-number">5</div>
+                    <span>Choose Your Path</span>
+                </div>
+                <div class="duration">Ongoing</div>
+            </div>
+            
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Frontend Framework (React/Vue)</div>
+                        <div class="milestone-desc">Pick one modern framework to specialize in</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Backend (Node.js/Python)</div>
+                        <div class="milestone-desc">Learn server-side programming, databases</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone" onclick="toggleMilestone(this)">
+                <div class="milestone-header">
+                    <div class="checkbox"><span class="checkmark">✓</span></div>
+                    <div class="milestone-content">
+                        <div class="milestone-title">Build a Portfolio</div>
+                        <div class="milestone-desc">Showcase 3-5 solid projects on GitHub</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load saved progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('codingProgress');
+            if (saved) {
+                const completed = JSON.parse(saved);
+                completed.forEach(index => {
+                    const milestones = document.querySelectorAll('.milestone');
+                    if (milestones[index]) {
+                        milestones[index].classList.add('completed');
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const milestones = document.querySelectorAll('.milestone');
+            const completed = [];
+            milestones.forEach((milestone, index) => {
+                if (milestone.classList.contains('completed')) {
+                    completed.push(index);
+                }
+            });
+            localStorage.setItem('codingProgress', JSON.stringify(completed));
+        }
+
+        // Toggle milestone completion
+        function toggleMilestone(element) {
+            // If clicking on a link, don't toggle
+            if (event.target.tagName === 'A') {
+                return;
+            }
+            
+            element.classList.toggle('completed');
+            element.classList.toggle('expanded');
+            saveProgress();
+            updateProgress();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const milestones = document.querySelectorAll('.milestone');
+            const completed = document.querySelectorAll('.milestone.completed').length;
+            const total = milestones.length;
+            const percentage = Math.round((completed / total) * 100);
+            
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>
